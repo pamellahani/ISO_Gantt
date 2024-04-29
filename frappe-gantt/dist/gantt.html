@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gantt Chart : 15 days at ISO</title>
+    <link rel="stylesheet" href="frappe-gantt.css">
+    <script src="frappe-gantt.js"></script>
+</head>
+<body>
+
+    <h1>Internship at ISO/CS (International Organisation of Standardization Central Secretariat)</h1>
+    <h3>From April 15th to August 30th</h3>
+    <h5>Location: Geneva, Switzerland</h5>
+    <h2>Departement: Information Technology Services Departement (ITS)</h2>
+    <h4>Subject: Development of an automated process and computer system allowing ISO member organizations to receive 
+        the official list of standards for sale, then modify, and submit their sales data for the calculation of royalties. Quality controls, data ingestion in our “business intelligence” platform.<h4>
+    <h2>Missions:</h2>
+    <ul>
+        <li>Analysis of existing process</li>
+        <li>Technical Review of commercial solutions that the Sales team may have started to evaluate</li>
+        <li>Proposal of a in-house architecture based on the tools and teechnologies that ISO ITS masters</li>
+        <li>Design and implementation of the export (Excel) and sending (email) system to ISO members;</li>
+        <li>Design and implementation of the system for collecting and validating declarations received (Excel)</li>
+        <li>Integration into ISO's Data Hub or into Qlik Sense BI system.</li>
+</div>
+
+<!-- Selection Bar for View Modes -->
+<h3>View Mode</h3>
+<div>
+  <label><input type="radio" name="viewMode" value="Day">Day</label>
+  <label><input type="radio" name="viewMode" value="Week" checked>Week</label>
+  <label><input type="radio" name="viewMode" value="Month">Month</label>
+</div>
+
+
+<div id="gantt"></div>
+
+<script>
+    var tasks = [
+        {
+            id: 'Task 1',
+            name: 'Administrative procedures and meeting with Data Team',
+            start: '2024-04-15',
+            end: '2024-04-15',
+            progress: 100,
+            dependencies: ''
+        },
+        {
+            id: 'Task 2',
+            name: 'HR Training and Meeting with Data Team',
+            start: '2024-04-16',
+            end: '2024-04-16',
+            progress: 100,
+            dependencies: 'Task 1'
+        },
+        {
+            id: 'Task 7',
+            name: 'Configuring working environment',
+            start: '2024-04-16',
+            end: '2024-04-24',
+            progress: 100,
+            dependencies: ''
+        }, 
+        { 
+            id: 'Task 67',
+            name: 'Discussions with marketing regarding business requirements for the platform',
+            start: '2024-04-16',
+            end: '2024-04-25',
+        },
+        {
+            id: 'Task 3',
+            name: 'Meeting with GSO (Gulf Standard Organization)', 
+            start: '2024-04-17',
+            end: '2024-04-17',
+            progress: 100,
+            dependencies: ''
+        },
+        {
+            id: 'Task 4',
+            name: 'Monthly ITS meeting and MSS Survey Meeting',
+            start: '2024-04-18',
+            end: '2024-04-18',
+            progress: 100,
+            dependencies: ''
+        },
+        {
+            id: 'Task 66',
+            name: 'Research and Analysis of existing process',
+            start: '2024-04-17',
+            end: '2024-04-19',
+            progress: 100,
+        }, 
+        {
+            id: 'Task 4-2',
+            name: 'MSS Survey Technical Review',
+            start: '2024-04-18',
+            end: '2024-04-22',
+            progress: 100,
+            dependencies: 'Task 4'
+        },
+        {
+            id: 'Task 6',
+            name: 'HR Training on Abseence Management and working hours on Timmi platform',
+            start: '2024-04-19',
+            end: '2024-04-19',
+            progress: 100,
+            dependencies: 'Task 1'
+        },
+        {
+        id: 'Task 8',
+        name: 'Learning Kotlin with Kotlin Koans',
+        start: '2024-04-24',
+        end: '2024-05-03',
+        progress: 40,
+        dependencies: ''
+        }, 
+        {
+        id: 'Task 9',
+        name: 'Study Qlik Code for Auto Corrections',
+        start: '2024-04-27',
+        end: '2024-04-29',
+        progress: 0,
+        dependencies: ''
+    },
+    {
+        id: 'MVP', 
+        name: 'Create a Minimum Viable Product (MVP)',
+        start: '2024-04-29',
+        end: '2024-05-03',
+    }, 
+    {
+        id: 'Task 10',
+        name: 'Start coding small Functions in Kotlin',
+        start: '2024-04-29',
+        end: '2024-04-30',
+        progress: 0,
+        dependencies: 'MVP'
+    },
+    {
+        id: 'Meeting with Alando',
+        name: 'Forking Qlik Sense source code for automatic corrections',
+        start: '2024-04-29',
+        end: '2024-04-30',
+        progress: 0,
+        dependencies: ''
+    },
+    {
+        id: 'Meeting with Sylvain',
+        name: 'Getting started with executing MSS Survey',
+        start: '2024-04-29',
+        end: '2024-04-30',
+        progress: 40,
+        dependencies: ''
+    },
+    {
+        id: 'Task 11',
+        name: 'Create Unit Tests in Excel',
+        start: '2024-04-30',
+        end: '2024-05-02',
+        progress: 0,
+        dependencies: 'MVP'
+    },
+    {
+        id: 'Task 12',
+        name: 'Simulate Excel Flash Fill in Kotlin',
+        start: '2024-05-02',
+        end: '2024-05-04',
+        progress: 0,
+        dependencies: 'Task 11'
+    },
+]
+
+const gantt = new Gantt("#gantt", tasks, {
+  header_height: 50,
+  column_width: 30,
+  step: 24,
+  view_modes: ['Day', 'Week', 'Month'],
+  bar_height: 20,
+  bar_corner_radius: 3,
+  arrow_curve: 5,
+  padding: 18,
+  view_mode: 'Week',
+  language: 'en',
+  on_click: (task) => console.log(task),
+  on_date_change: (task, start, end) => console.log(task, start, end),
+  on_progress_change: (task, progress) => console.log(task, progress),
+  on_view_change: (mode) => console.log(mode),
+
+});
+
+// Function to change the view mode based on the selection
+function changeViewMode(newMode) {
+    gantt.change_view_mode(newMode);
+}
+
+// Attach an event listener to the radio buttons
+document.querySelectorAll('input[name="viewMode"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        changeViewMode(e.target.value);
+    });
+});
+
+
+</script>
+<h2>Intern:</h2>
+<div>
+  <p>Pamella Hani</p>
+
+<h2>Internship Supervisor:
+</h2>
+<div>
+  <p>Laurent Tettoni</p>
+
+<h2>Referent Professor:</h2>
+<div>
+  <p>Jean-Francois Méhaut</p>
+</body>
+</html>
